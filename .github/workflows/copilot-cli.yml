@@ -25,6 +25,31 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: 'Run Copilot with Custom Config'
+        uses: austenstone/copilot-cli@v1
+        with:
+          github-token: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          prompt: |
+            Review this pull request for:
+            1. Code quality and best practices
+            2. Security vulnerabilities
+            3. Performance implications
+            4. Documentation completeness
+          mcp-config: |
+            {
+              "mcpServers": {
+                "time": {
+                  "command": "uvx",
+                  "args": [
+                    "mcp-server-time",
+                    "--local-timezone",
+                    "America/New_York"
+                  ],
+                  "tools": ["*"]
+                }
+              }
+            }
+
       # Install Copilot CLI
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
@@ -36,7 +61,7 @@ jobs:
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
       # Interact with private repos
       - name: Private Repos
         run: |
