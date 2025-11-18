@@ -70,4 +70,5 @@ jobs:
         run: |
           copilot -p "which private GitHub repos do I have access to?" --allow-all-tools
         env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
