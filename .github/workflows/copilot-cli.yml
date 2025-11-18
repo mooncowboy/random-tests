@@ -35,20 +35,7 @@ jobs:
             2. Security vulnerabilities
             3. Performance implications
             4. Documentation completeness
-          mcp-config: |
-            {
-              "mcpServers": {
-                "time": {
-                  "command": "uvx",
-                  "args": [
-                    "mcp-server-time",
-                    "--local-timezone",
-                    "America/New_York"
-                  ],
-                  "tools": ["*"]
-                }
-              }
-            }
+          
 
       # Install Copilot CLI
       - name: Install Copilot CLI
