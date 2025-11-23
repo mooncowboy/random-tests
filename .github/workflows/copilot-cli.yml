@@ -37,6 +37,11 @@ jobs:
           mkdir -p ~/.copilot
           cp mcp-servers.json ~/.copilot/mcp-servers.json
       
+      # Ensure Azure DevOps MCP config
+      - name: Ensure Azure DevOps MCP Config
+        run: |
+          sed -i "s|{{ado_org}}|${{ secrets.ADO_MCP_ORG }}|g" ~/.copilot/mcp-servers.json
+      
       # show installed MCP servers
       - name: Show MCP Servers
         run: cat ~/.copilot/mcp-servers.json 
@@ -48,7 +53,7 @@ jobs:
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-
+          
       # Interact with private repos
       - name: Private Repos
         run: |
@@ -56,3 +61,13 @@ jobs:
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Interact with an MCP server (Azure DevOps)
+      - name: Public Repos
+        run: |
+          copilot -p "which projects do I have in my Azure DevOps organization?" --allow-all-tools
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          ADO_MCP_AUTH_TOKEN: ${{ secrets.ADO_MCP_AUTH_TOKEN }}
+          
