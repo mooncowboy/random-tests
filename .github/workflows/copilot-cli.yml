@@ -31,6 +31,12 @@ jobs:
       - name: Install Copilot CLI
         run: npm install -g @github/copilot
 
+      # Create MCP config file
+      - name: Create MCP Config
+        run: |
+          mkdir -p ~/.copilot
+          cp mcp-servers.json ~/.copilot/mcp-servers.json
+      
       # show installed MCP servers
       - name: Show MCP Servers
         run: cat ~/.copilot/mcp-servers.json 
