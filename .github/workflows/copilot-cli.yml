@@ -65,7 +65,7 @@ jobs:
       # Interact with an MCP server (Azure DevOps)
       - name: Public Repos
         run: |
-          copilot -p "which projects do I have in my Azure DevOps organization?" --allow-all-tools
+          copilot -p "which projects do I have in my Azure DevOps organization? Use the Azure DevOps MCP for that." --allow-all-tools
         env:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
